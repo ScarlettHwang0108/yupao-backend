@@ -34,7 +34,8 @@ import java.util.stream.Collectors;
 /**
  * 队伍接口
  *
- * @author yupi
+ * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
+ * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 @RestController
 @RequestMapping("/team")
@@ -110,7 +111,8 @@ public class TeamController {
                 boolean hasJoin = hasJoinTeamIdSet.contains(team.getId());
                 team.setHasJoin(hasJoin);
             });
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         // 3、查询已加入队伍的人数
         QueryWrapper<UserTeam> userTeamJoinQueryWrapper = new QueryWrapper<>();
         userTeamJoinQueryWrapper.in("teamId", teamIdList);
