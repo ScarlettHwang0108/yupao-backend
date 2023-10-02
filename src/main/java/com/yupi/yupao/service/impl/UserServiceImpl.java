@@ -3,15 +3,13 @@ package com.yupi.yupao.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.gson.Gson;
-import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.yupi.yupao.common.ErrorCode;
 import com.yupi.yupao.constant.UserConstant;
 import com.yupi.yupao.exception.BusinessException;
-import com.yupi.yupao.model.domain.User;
-import com.yupi.yupao.model.vo.UserVO;
-import com.yupi.yupao.service.UserService;
 import com.yupi.yupao.mapper.UserMapper;
+import com.yupi.yupao.model.domain.User;
+import com.yupi.yupao.service.UserService;
 import com.yupi.yupao.utils.AlgorithmUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +24,6 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.yupi.yupao.constant.UserConstant.USER_LOGIN_STATE;
 
@@ -123,11 +120,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             return null;
         }
         // 2. 加密
-        String encryptPassword = DigestUtils.md5DigestAsHex((SALT + userPassword).getBytes());
+        //String encryptPassword = DigestUtils.md5DigestAsHex((SALT + userPassword).getBytes());
         // 查询用户是否存在
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("userAccount", userAccount);
-        queryWrapper.eq("userPassword", encryptPassword);
+        queryWrapper.eq("userPassword", userPassword);
         User user = userMapper.selectOne(queryWrapper);
         // 用户不存在
         if (user == null) {
@@ -321,20 +318,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      * @param tagNameList 用户要拥有的标签
      * @return
      */
-    @Deprecated
-    private List<User> searchUsersByTagsBySQL(List<String> tagNameList) {
-        if (CollectionUtils.isEmpty(tagNameList)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR);
-        }
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        // 拼接 and 查询
-        // like '%Java%' and like '%Python%'
-        for (String tagName : tagNameList) {
-            queryWrapper = queryWrapper.like("tags", tagName);
-        }
-        List<User> userList = userMapper.selectList(queryWrapper);
-        return userList.stream().map(this::getSafetyUser).collect(Collectors.toList());
-    }
+
+//    public List<User> searchUsersByTags(List<String> tagNameList) {
+//        if (CollectionUtils.isEmpty(tagNameList)) {
+//            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+//        }
+//        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+//        // 拼接 and 查询
+//        // like '%Java%' and like '%Python%'
+//        for (String tagName : tagNameList) {
+//            queryWrapper = queryWrapper.like("tags", tagName);
+//        }
+//        List<User> userList = userMapper.selectList(queryWrapper);
+//        return userList.stream().map(this::getSafetyUser).collect(Collectors.toList());
+//    }
 
 }
 

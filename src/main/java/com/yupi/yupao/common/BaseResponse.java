@@ -1,17 +1,11 @@
 package com.yupi.yupao.common;
 
-import lombok.Data;
-
 import java.io.Serializable;
 
 /**
  * 通用返回类
  *
- * @param <T>
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
-@Data
 public class BaseResponse<T> implements Serializable {
 
     private int code;
@@ -41,5 +35,77 @@ public class BaseResponse<T> implements Serializable {
 
     public BaseResponse(ErrorCode errorCode) {
         this(errorCode.getCode(), null, errorCode.getMessage(), errorCode.getDescription());
+    }
+
+    public int getCode() {
+        return this.code;
+    }
+
+    public T getData() {
+        return this.data;
+    }
+
+    public String getMessage() {
+        return this.message;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean equals(final Object o) {
+        if (o == this) return true;
+        if (!(o instanceof BaseResponse)) return false;
+        final BaseResponse<?> other = (BaseResponse<?>) o;
+        if (!other.canEqual((Object) this)) return false;
+        if (this.getCode() != other.getCode()) return false;
+        final Object this$data = this.getData();
+        final Object other$data = other.getData();
+        if (this$data == null ? other$data != null : !this$data.equals(other$data)) return false;
+        final Object this$message = this.getMessage();
+        final Object other$message = other.getMessage();
+        if (this$message == null ? other$message != null : !this$message.equals(other$message)) return false;
+        final Object this$description = this.getDescription();
+        final Object other$description = other.getDescription();
+        if (this$description == null ? other$description != null : !this$description.equals(other$description))
+            return false;
+        return true;
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof BaseResponse;
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        result = result * PRIME + this.getCode();
+        final Object $data = this.getData();
+        result = result * PRIME + ($data == null ? 43 : $data.hashCode());
+        final Object $message = this.getMessage();
+        result = result * PRIME + ($message == null ? 43 : $message.hashCode());
+        final Object $description = this.getDescription();
+        result = result * PRIME + ($description == null ? 43 : $description.hashCode());
+        return result;
+    }
+
+    public String toString() {
+        return "BaseResponse(code=" + this.getCode() + ", data=" + this.getData() + ", message=" + this.getMessage() + ", description=" + this.getDescription() + ")";
     }
 }

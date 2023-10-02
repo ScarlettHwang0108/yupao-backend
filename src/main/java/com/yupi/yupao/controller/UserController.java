@@ -9,7 +9,6 @@ import com.yupi.yupao.exception.BusinessException;
 import com.yupi.yupao.model.domain.User;
 import com.yupi.yupao.model.request.UserLoginRequest;
 import com.yupi.yupao.model.request.UserRegisterRequest;
-import com.yupi.yupao.model.vo.UserVO;
 import com.yupi.yupao.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -29,8 +28,6 @@ import static com.yupi.yupao.constant.UserConstant.USER_LOGIN_STATE;
 /**
  * 用户接口
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 @RestController
 @RequestMapping("/user")
