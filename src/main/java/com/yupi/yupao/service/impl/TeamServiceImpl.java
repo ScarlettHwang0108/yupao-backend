@@ -101,8 +101,8 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team>
         QueryWrapper<Team> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("userId", userId);
         long hasTeamNum = this.count(queryWrapper);
-        if (hasTeamNum >= 5) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户最多创建 5 个队伍");
+        if (hasTeamNum >= 100) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户最多创建 100 个队伍");
         }
         // 8. 插入队伍信息到队伍表
         team.setId(null);
